@@ -876,6 +876,12 @@ body > [data-popper-placement] {
   .local-custom-emoji {
     width: 30px;
     height: 30px;
+    transition-duration: 500ms;
+
+    &:hover{
+      width: 50px;
+      height: 50px;
+    }
   }
 
   p {
@@ -1296,6 +1302,12 @@ body > [data-popper-placement] {
     .local-custom-emoji {
       width: 30px;
       height: 30px;
+      transition-duration: 500ms;
+
+      &:hover{
+        width: 50px;
+        height: 50px;
+      }
     }
 
     .status__content__spoiler-link {
