@@ -81,6 +81,7 @@
  * @property {boolean=} use_pending_items
  * @property {string} version
  * @property {boolean} translation_enabled
+ * @property {boolean} resized_custom_emoji
  */
 
 /**
@@ -134,6 +135,7 @@ export const usePendingItems = getMeta('use_pending_items');
 export const version = getMeta('version');
 export const translationEnabled = getMeta('translation_enabled');
 export const languages = initialState?.languages;
+export const resizedCustomEmoji = getMeta('resized_custom_emoji');
 export const statusPageUrl = getMeta('status_page_url');
 
 export default initialState;
