@@ -88,7 +88,7 @@ export function normalizeStatus(status, normalOldStatus) {
     const emojiMap      = makeEmojiMap(normalStatus);
 
     const uri = status.uri;
-    const isLocalCustomEmoji = uri.match(/dev-otadon\.kapuverse\.net/) !== null;
+    const isLocalCustomEmoji = uri.match(/kapuverse\.net/) !== null;
 
     normalStatus.search_index = domParser.parseFromString(searchContent, 'text/html').documentElement.textContent;
     normalStatus.contentHtml  = emojifyStatus(isLocalCustomEmoji, normalStatus.content, emojiMap);
