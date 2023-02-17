@@ -267,7 +267,7 @@ ja:
       invite:
         comment: コメント
       invite_request:
-        text: 意気込みをお聞かせください
+        text: 推しや趣味の話など（スパム防止のため意気込みを一言お願いします！※アカウント申請の審査のみに使用します。）
       ip_block:
         comment: コメント
         ip: IP
