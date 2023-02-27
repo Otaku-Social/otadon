@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2022_12_06_114142) do
     t.integer "header_file_size"
     t.datetime "header_updated_at"
     t.string "avatar_remote_url"
-    t.boolean "locked", default: false, null: false
+    t.boolean "locked", default: true, null: false
     t.string "header_remote_url", default: "", null: false
     t.datetime "last_webfingered_at"
     t.string "inbox_url", default: "", null: false
@@ -177,7 +177,7 @@ ActiveRecord::Schema.define(version: 2022_12_06_114142) do
     t.string "also_known_as", array: true
     t.datetime "silenced_at"
     t.datetime "suspended_at"
-    t.boolean "hide_collections"
+    t.boolean "hide_collections", default: true
     t.integer "avatar_storage_schema_version"
     t.integer "header_storage_schema_version"
     t.string "devices_url"

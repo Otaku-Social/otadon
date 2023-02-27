@@ -38,8 +38,6 @@ defaults: &defaults
   trends_as_landing_page: true
   trendable_by_default: false
   default_privacy: 'private'
-  hide_collections: ture
-  locked: true
   crop_images: true
   notification_emails:
     follow: true
