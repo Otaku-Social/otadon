@@ -13,7 +13,7 @@ import spring from 'react-motion/lib/spring';
 import SearchResultsContainer from './containers/search_results_container';
 import { openModal } from 'mastodon/actions/modal';
 import elephantUIPlane from '../../../images/elephant_ui_plane.svg';
-import { mascot } from '../../initial_state';
+import { mascot, hideFederatedTimeline } from '../../initial_state';
 import Icon from 'mastodon/components/icon';
 import { logOut } from 'mastodon/utils/log_out';
 import Column from 'mastodon/components/column';
@@ -100,10 +100,7 @@ class Compose extends React.PureComponent {
             {!columns.some(column => column.get('id') === 'NOTIFICATIONS') && (
               <Link to='/notifications' className='drawer__tab' title={intl.formatMessage(messages.notifications)} aria-label={intl.formatMessage(messages.notifications)}><Icon id='bell' fixedWidth /></Link>
             )}
-            {!columns.some(column => column.get('id') === 'COMMUNITY') && (
-              <Link to='/public/local' className='drawer__tab' title={intl.formatMessage(messages.community)} aria-label={intl.formatMessage(messages.community)}><Icon id='users' fixedWidth /></Link>
-            )}
-            {!columns.some(column => column.get('id') === 'PUBLIC') && (
+            {((!columns.some(column => column.get('id') === 'PUBLIC')) && !hideFederatedTimeline) && (
               <Link to='/public' className='drawer__tab' title={intl.formatMessage(messages.public)} aria-label={intl.formatMessage(messages.public)}><Icon id='globe' fixedWidth /></Link>
             )}
             <a href='/settings/preferences' className='drawer__tab' title={intl.formatMessage(messages.preferences)} aria-label={intl.formatMessage(messages.preferences)}><Icon id='cog' fixedWidth /></a>

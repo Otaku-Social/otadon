@@ -43,6 +43,11 @@
   .fields-group
     = f.input :setting_resized_custom_emoji, as: :boolean, wrapper: :with_label, recommended: true
 
+  %h4= t '（Web版）連合タイムライン非表示設定'
+
+  .fields-group
+    = f.input :setting_hide_federated_timeline, as: :boolean, wrapper: :with_label
+
   %h4= t 'appearance.discovery'
 
   .fields-group

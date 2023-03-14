@@ -8,7 +8,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import ImmutablePropTypes from 'react-immutable-proptypes';
 import ImmutablePureComponent from 'react-immutable-pure-component';
-import { me, showTrends } from '../../initial_state';
+import { me, showTrends, hideFederatedTimeline } from '../../initial_state';
 import { fetchFollowRequests } from 'mastodon/actions/accounts';
 import { List as ImmutableList } from 'immutable';
 import NavigationContainer from '../compose/containers/navigation_container';
@@ -103,9 +103,11 @@ class GettingStarted extends ImmutablePureComponent {
       );
     }
 
-    navItems.push(
-      <ColumnLink key='public_timeline' icon='globe' text={intl.formatMessage(messages.public_timeline)} to='/public' />,
-    );
+    if(!hideFederatedTimeline) {
+      navItems.push(
+        <ColumnLink key='public_timeline' icon='globe' text={intl.formatMessage(messages.public_timeline)} to='/public' />,
+      );
+    }
 
     if (signedIn) {
       navItems.push(

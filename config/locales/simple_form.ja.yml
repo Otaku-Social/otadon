@@ -217,7 +217,8 @@ ja:
         setting_unfollow_modal: フォローを解除する前に確認ダイアログを表示する
         setting_use_blurhash: 非表示のメディアを色付きのぼかしで表示する
         setting_use_pending_items: 手動更新モード
-        setting_resized_custom_emoji: おたどんカスタム絵文字の表示サイズを大きくする
+        setting_resized_custom_emoji: ローカルカスタム絵文字の表示サイズを大きくする
+        setting_hide_federated_timeline: 連合タイムラインをメニューから非表示にする
         severity: 重大性
         sign_in_token_attempt: セキュリティコード
         title: タイトル
