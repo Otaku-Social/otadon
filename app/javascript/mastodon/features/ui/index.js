@@ -182,7 +182,6 @@ class SwitchingColumnsArea extends React.PureComponent {
 
           <WrappedRoute path={['/home', '/timelines/home']} component={HomeTimeline} content={children} />
           <WrappedRoute path={['/public', '/timelines/public']} exact component={PublicTimeline} content={children} />
-          <WrappedRoute path={['/public/local', '/timelines/public/local']} exact component={CommunityTimeline} content={children} />
           <WrappedRoute path={['/conversations', '/timelines/direct']} component={DirectTimeline} content={children} />
           <WrappedRoute path='/tags/:id' component={HashtagTimeline} content={children} />
           <WrappedRoute path='/lists/:id' component={ListTimeline} content={children} />
@@ -499,10 +498,6 @@ class UI extends React.PureComponent {
 
   handleHotkeyGoToNotifications = () => {
     this.context.router.history.push('/notifications');
-  };
-
-  handleHotkeyGoToLocal = () => {
-    this.context.router.history.push('/public/local');
   };
 
   handleHotkeyGoToFederated = () => {

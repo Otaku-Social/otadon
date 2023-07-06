@@ -11,7 +11,6 @@ Rails.application.routes.draw do
     /keyboard-shortcuts
     /home
     /public
-    /public/local
     /conversations
     /lists/(*any)
     /notifications
