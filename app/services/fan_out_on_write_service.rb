@@ -116,7 +116,6 @@ class FanOutOnWriteService < BaseService
   def broadcast_to_hashtag_streams!
     @status.tags.map(&:name).each do |hashtag|
       redis.publish("timeline:hashtag:#{hashtag.mb_chars.downcase}", anonymous_payload)
-      redis.publish("timeline:hashtag:#{hashtag.mb_chars.downcase}:local", anonymous_payload) if @status.local?
     end
   end
 
@@ -124,11 +123,17 @@ class FanOutOnWriteService < BaseService
     return if @status.reply? && @status.in_reply_to_account_id != @account.id
 
     redis.publish('timeline:public', anonymous_payload)
-    redis.publish(@status.local? ? 'timeline:public:local' : 'timeline:public:remote', anonymous_payload)
+    if @status.local?
+    else
+      redis.publish('timeline:public:remote', anonymous_payload)
+    end
 
     if @status.with_media?
       redis.publish('timeline:public:media', anonymous_payload)
-      redis.publish(@status.local? ? 'timeline:public:local:media' : 'timeline:public:remote:media', anonymous_payload)
+      if @status.local?
+      else
+        redis.publish('timeline:public:remote:media', anonymous_payload)
+      end
     end
   end
 

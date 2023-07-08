@@ -96,7 +96,6 @@ const keyMap = {
   back: 'backspace',
   goToHome: 'g h',
   goToNotifications: 'g n',
-  goToLocal: 'g l',
   goToFederated: 'g t',
   goToDirect: 'g d',
   goToStart: 'g s',
@@ -182,7 +181,6 @@ class SwitchingColumnsArea extends React.PureComponent {
 
           <WrappedRoute path={['/home', '/timelines/home']} component={HomeTimeline} content={children} />
           <WrappedRoute path={['/public', '/timelines/public']} exact component={PublicTimeline} content={children} />
-          <WrappedRoute path={['/public/local', '/timelines/public/local']} exact component={CommunityTimeline} content={children} />
           <WrappedRoute path={['/conversations', '/timelines/direct']} component={DirectTimeline} content={children} />
           <WrappedRoute path='/tags/:id' component={HashtagTimeline} content={children} />
           <WrappedRoute path='/lists/:id' component={ListTimeline} content={children} />
@@ -501,10 +499,6 @@ class UI extends React.PureComponent {
     this.context.router.history.push('/notifications');
   };
 
-  handleHotkeyGoToLocal = () => {
-    this.context.router.history.push('/public/local');
-  };
-
   handleHotkeyGoToFederated = () => {
     this.context.router.history.push('/public');
   };
@@ -555,7 +549,6 @@ class UI extends React.PureComponent {
       back: this.handleHotkeyBack,
       goToHome: this.handleHotkeyGoToHome,
       goToNotifications: this.handleHotkeyGoToNotifications,
-      goToLocal: this.handleHotkeyGoToLocal,
       goToFederated: this.handleHotkeyGoToFederated,
       goToDirect: this.handleHotkeyGoToDirect,
       goToStart: this.handleHotkeyGoToStart,

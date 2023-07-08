@@ -124,7 +124,6 @@ class RemoveStatusService < BaseService
 
     @status.tags.map(&:name).each do |hashtag|
       redis.publish("timeline:hashtag:#{hashtag.mb_chars.downcase}", @payload)
-      redis.publish("timeline:hashtag:#{hashtag.mb_chars.downcase}:local", @payload) if @status.local?
     end
   end
 
@@ -134,7 +133,7 @@ class RemoveStatusService < BaseService
     return if skip_streaming?
 
     redis.publish('timeline:public', @payload)
-    redis.publish(@status.local? ? 'timeline:public:local' : 'timeline:public:remote', @payload)
+    redis.publish('timeline:public:remote', @payload) unless @status.local?
   end
 
   def remove_from_media
@@ -143,7 +142,7 @@ class RemoveStatusService < BaseService
     return if skip_streaming?
 
     redis.publish('timeline:public:media', @payload)
-    redis.publish(@status.local? ? 'timeline:public:local:media' : 'timeline:public:remote:media', @payload)
+    redis.publish('timeline:public:remote:media', @payload) unless @status.local?
   end
 
   def remove_media

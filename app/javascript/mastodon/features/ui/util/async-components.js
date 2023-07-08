@@ -18,10 +18,6 @@ export function PublicTimeline () {
   return import(/* webpackChunkName: "features/public_timeline" */'../../public_timeline');
 }
 
-export function CommunityTimeline () {
-  return import(/* webpackChunkName: "features/community_timeline" */'../../community_timeline');
-}
-
 export function HashtagTimeline () {
   return import(/* webpackChunkName: "features/hashtag_timeline" */'../../hashtag_timeline');
 }
