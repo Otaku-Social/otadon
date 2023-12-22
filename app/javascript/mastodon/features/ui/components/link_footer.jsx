@@ -60,6 +60,7 @@ class LinkFooter extends PureComponent {
     const canProfileDirectory = profileDirectory;
 
     const DividingCircle = <span aria-hidden>{' · '}</span>;
+    const nowYear = new Date().getFullYear();
 
     return (
       <div className='link-footer'>
@@ -90,7 +91,7 @@ class LinkFooter extends PureComponent {
           {DividingCircle}
           <a href='https://help.otadon.com' target='_blank'><FormattedMessage id='footer.help_center' defaultMessage='Help Center' /></a>
           {DividingCircle}
-          2023 Otaku Social.
+          {nowYear} Otaku Social.
         </p>
 
         <p>
