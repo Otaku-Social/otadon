@@ -9,7 +9,7 @@ RSpec.describe BootstrapTimelineService, type: :service do
     let(:service)    { instance_double(FollowService) }
     let(:autofollow) { false }
     let(:inviter)    { Fabricate(:user, confirmed_at: 2.days.ago) }
-    let(:invite)     { Fabricate(:invite, user: inviter, max_uses: nil, expires_at: 1.hour.from_now, autofollow: autofollow) }
+    let(:invite)     { Fabricate(:invite, user: inviter, max_uses: 1, expires_at: 1.hour.from_now, autofollow: autofollow) }
     let(:new_user)   { Fabricate(:user, invite_code: invite.code) }
 
     before do

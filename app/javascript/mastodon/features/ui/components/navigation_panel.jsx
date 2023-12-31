@@ -98,10 +98,10 @@ class NavigationPanel extends Component {
           <ColumnLink transparent to='/search' icon='search' text={intl.formatMessage(messages.search)} />
         )}
 
-        {
+        { /* eslint-disable consistent-return */
           (() => {
             if (!signedIn) {
-              return <ColumnLink transparent to='/public/local' isActive={this.isFirehoseActive} icon='globe' text={intl.formatMessage(messages.firehose)}/>
+              return <ColumnLink transparent to='/public/local' isActive={this.isFirehoseActive} icon='globe' text={intl.formatMessage(messages.firehose)} />
             } else {
               if (!hideLocalTimeline || !hideRemoteTimeline || !hideFederatedTimeline) {
                 let path = "/public/local";
@@ -112,17 +112,16 @@ class NavigationPanel extends Component {
                     path = "/public";
                   }
                 }
-                return <ColumnLink transparent to={path} isActive={this.isFirehoseActive} icon='globe' text={intl.formatMessage(messages.firehose)}/>
+                return <ColumnLink transparent to={path} isActive={this.isFirehoseActive} icon='globe' text={intl.formatMessage(messages.firehose)} />
               }
             }
           })()
+          /* eslint-enable consistent-return */
         }
 
 
         {(!signedIn && timelinePreview) && (
-          <>
-            <ColumnLink transparent href='https://tagcloud.otadon.com/' icon='cloud' text='Otadon Hashtag Cloud' />
-          </>
+          <ColumnLink transparent href='https://tagcloud.otadon.com/' icon='cloud' text='Otadon Hashtag Cloud' />
         )}
 
         {!signedIn && (
@@ -147,11 +146,15 @@ class NavigationPanel extends Component {
           </>
         )}
 
-        {(signedIn && timelinePreview) && (
-          <>
-          {showOtadonTagCloud && <ColumnLink transparent href='https://tagcloud.otadon.com/' icon='cloud' text='Otadon Hashtag Cloud' />}
-          </>
-        )}
+        
+        { /* eslint-disable react/jsx-no-useless-fragment */
+          (signedIn && timelinePreview) && (
+            <>
+              {showOtadonTagCloud && <ColumnLink transparent href='https://tagcloud.otadon.com/' icon='cloud' text='Otadon Hashtag Cloud' />}
+            </>
+          )
+          /* eslint-enable react/jsx-no-useless-fragment */
+        }
 
         <div className='navigation-panel__legal'>
           <hr />

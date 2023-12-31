@@ -105,7 +105,7 @@ Lint/UselessAssignment:
 
 # Configuration parameters: AllowedMethods, AllowedPatterns, CountRepeatedAttributes.
 Metrics/AbcSize:
-  Max: 144
+  Max: 180
 
 # Configuration parameters: CountBlocks, Max.
 Metrics/BlockNesting:

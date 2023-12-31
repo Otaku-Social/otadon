@@ -11,14 +11,13 @@ import { changeSetting } from 'mastodon/actions/settings';
 import { connectPublicStream, connectCommunityStream } from 'mastodon/actions/streaming';
 import { expandPublicTimeline, expandCommunityTimeline } from 'mastodon/actions/timelines';
 import { DismissableBanner } from 'mastodon/components/dismissable_banner';
-import initialState, { domain } from 'mastodon/initial_state';
+import initialState, { domain , hideLocalTimeline, hideRemoteTimeline, hideFederatedTimeline } from 'mastodon/initial_state';
 import { useAppDispatch, useAppSelector } from 'mastodon/store';
 
 import Column from '../../components/column';
 import ColumnHeader from '../../components/column_header';
 import SettingToggle from '../notifications/components/setting_toggle';
 import StatusListContainer from '../ui/containers/status_list_container';
-import { hideLocalTimeline, hideRemoteTimeline, hideFederatedTimeline } from '../../initial_state';
 
 const messages = defineMessages({
   title: { id: 'column.firehose', defaultMessage: 'Live feeds' },
