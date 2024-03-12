@@ -89,8 +89,6 @@ class LinkFooter extends PureComponent {
           {DividingCircle}
           <Link to='/privacy-policy' target={multiColumn ? '_blank' : undefined}><FormattedMessage id='footer.privacy_policy' defaultMessage='Privacy policy' /></Link>
           {DividingCircle}
-          <a href='https://help.otadon.com' target='_blank'><FormattedMessage id='footer.help_center' defaultMessage='Help Center' /></a>
-          {DividingCircle}
           {nowYear} Otaku Social.
         </p>
 
