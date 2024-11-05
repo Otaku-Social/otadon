@@ -1772,8 +1772,6 @@ ja:
     default: Mastodon (ダーク)
     mastodon-light: Mastodon (ライト)
     system: 自動 (システムのテーマを使用)
-    otadon-light: Otadon (ライト)
-    otadon-darkblue: Otadon (ダークブルー)
   time:
     formats:
       default: "%Y年%m月%d日 %H:%M"
