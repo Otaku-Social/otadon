@@ -20,7 +20,7 @@ import { FollowButton } from 'mastodon/components/follow_button';
 import { Icon } from 'mastodon/components/icon';
 import { IconButton } from 'mastodon/components/icon_button';
 import { VerifiedBadge } from 'mastodon/components/verified_badge';
-import { domain } from 'mastodon/initial_state';
+import { domain, disableFollowSuggestion } from 'mastodon/initial_state';
 
 const messages = defineMessages({
   follow: { id: 'account.follow', defaultMessage: 'Follow' },
@@ -168,7 +168,7 @@ export const InlineFollowSuggestions = ({ hidden }) => {
     return null;
   }
 
-  if (hidden) {
+  if (hidden || disableFollowSuggestion) {
     return (
       <div className='inline-follow-suggestions' />
     );

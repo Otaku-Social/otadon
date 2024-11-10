@@ -23,6 +23,7 @@ class UserSettings
   setting :hide_federated_timeline, default: false
   setting :hide_remote_timeline, default: false
   setting :show_otadon_tag_cloud, default: true
+  setting :disable_follow_suggestion, default: false
 
   namespace :web do
     setting :advanced_layout, default: false
