@@ -84,21 +84,21 @@ const emojifyTextNode = (node, customEmojis) => {
         replacement.setAttribute('class', 'emojione resized-custom-emoji-stamp');
       } else {
         switch (resizedCustomEmoji) {
-          case 'hover':
-            replacement.setAttribute('class', 'emojione resized-custom-emoji');
-            break;
-          case 'best':
-            replacement.setAttribute('class', 'emojione resized-custom-emoji-the-best');
-            break;
-          case 'fixed_x2':
-            replacement.setAttribute('class', 'emojione resized-custom-emoji-fixed');
-            break;
-          case 'fixed_x3':
-            replacement.setAttribute('class', 'emojione resized-custom-emoji-fixed-big');
-            break;
-          default:
-            replacement.setAttribute('class', 'emojione-wide custom-emoji');
-            break;
+        case 'hover':
+          replacement.setAttribute('class', 'emojione resized-custom-emoji');
+          break;
+        case 'best':
+          replacement.setAttribute('class', 'emojione resized-custom-emoji-the-best');
+          break;
+        case 'fixed_x2':
+          replacement.setAttribute('class', 'emojione resized-custom-emoji-fixed');
+          break;
+        case 'fixed_x3':
+          replacement.setAttribute('class', 'emojione resized-custom-emoji-fixed-big');
+          break;
+        default:
+          replacement.setAttribute('class', 'emojione-wide custom-emoji');
+          break;
         }
       }
 
