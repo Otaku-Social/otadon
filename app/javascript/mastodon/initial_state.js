@@ -48,6 +48,7 @@
  * @property {boolean} hide_remote_timeline
  * @property {boolean} hide_federated_timeline
  * @property {boolean} show_otadon_tag_cloud
+ * @property {boolean} disable_follow_suggestion
  */
 
 /**
@@ -128,6 +129,7 @@ export const hideLocalTimeline = getMeta('hide_local_timeline');
 export const hideRemoteTimeline = getMeta('hide_remote_timeline');
 export const hideFederatedTimeline = getMeta('hide_federated_timeline');
 export const showOtadonTagCloud = getMeta('show_otadon_tag_cloud');
+export const disableFollowSuggestion = getMeta('disable_follow_suggestion');
 
 /**
  * @returns {string | undefined}

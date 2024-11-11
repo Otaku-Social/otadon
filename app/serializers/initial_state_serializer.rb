@@ -34,6 +34,7 @@ class InitialStateSerializer < ActiveModel::Serializer
       store[:hide_remote_timeline] = object_account_user.hide_remote_timeline
       store[:hide_federated_timeline] = object_account_user.hide_federated_timeline
       store[:show_otadon_tag_cloud] = object_account_user.show_otadon_tag_cloud
+      store[:disable_follow_suggestion] = object_account_user.disable_follow_suggestion
     else
       store[:auto_play_gif] = Setting.auto_play_gif
       store[:display_media] = Setting.display_media

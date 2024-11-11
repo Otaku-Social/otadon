@@ -11282,3 +11282,15 @@ noscript {
     background-image: url('../images/filter-stripes.svg');
   }
 }
+
+.remote-user-info-container {
+  display: flex;
+  flex-direction: row;
+  padding: 12px 0;
+  gap: 4px;
+}
+
+.remote-user-info-text {
+  font-size: 15px;
+  line-height: 20px;
+}

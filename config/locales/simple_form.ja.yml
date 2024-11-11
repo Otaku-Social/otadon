@@ -238,6 +238,7 @@ ja:
         hide_local_timeline: ローカルタイムラインを非表示にする
         hide_remote_timeline: リモートタイムラインを非表示にする
         hide_federated_timeline: 連合タイムラインを非表示にする
+        disable_follow_suggestion: フォローを増やしてみませんか？を非表示にする
         show_otadon_tag_cloud: Otadon Hashtag Cloudを表示する
         severity: 重大性
         sign_in_token_attempt: セキュリティコード

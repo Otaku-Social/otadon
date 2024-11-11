@@ -154,4 +154,8 @@ module User::HasSettings
   def show_otadon_tag_cloud
     settings['show_otadon_tag_cloud']
   end
+
+  def disable_follow_suggestion
+    settings['disable_follow_suggestion']
+  end
 end
