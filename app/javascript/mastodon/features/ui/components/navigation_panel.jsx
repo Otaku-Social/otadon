@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import AlternateEmailIcon from '@/material-icons/400-24px/alternate_email.svg?react';
 import BookmarksActiveIcon from '@/material-icons/400-24px/bookmarks-fill.svg?react';
 import BookmarksIcon from '@/material-icons/400-24px/bookmarks.svg?react';
+import CloudIcon from '@/material-icons/400-24px/cloud.svg?react';
 import ExploreActiveIcon from '@/material-icons/400-24px/explore-fill.svg?react';
 import ExploreIcon from '@/material-icons/400-24px/explore.svg?react';
 import ModerationIcon from '@/material-icons/400-24px/gavel.svg?react';
@@ -28,7 +29,6 @@ import SearchIcon from '@/material-icons/400-24px/search.svg?react';
 import SettingsIcon from '@/material-icons/400-24px/settings.svg?react';
 import StarActiveIcon from '@/material-icons/400-24px/star-fill.svg?react';
 import StarIcon from '@/material-icons/400-24px/star.svg?react';
-import CloudIcon from '@/material-icons/400-24px/cloud.svg?react';
 import { fetchFollowRequests } from 'mastodon/actions/accounts';
 import { IconWithBadge } from 'mastodon/components/icon_with_badge';
 import { WordmarkLogo } from 'mastodon/components/logo';
@@ -169,7 +169,7 @@ class NavigationPanel extends Component {
           { /* eslint-disable consistent-return */
             (() => {
               if (!signedIn) {
-                return <ColumnLink transparent to='/public/local' isActive={this.isFirehoseActive} icon='globe' iconComponent={PublicIcon} text={intl.formatMessage(messages.firehose)} />
+                return <ColumnLink transparent to='/public/local' isActive={this.isFirehoseActive} icon='globe' iconComponent={PublicIcon} text={intl.formatMessage(messages.firehose)} />;
               } else {
                 if (!hideLocalTimeline || !hideRemoteTimeline || !hideFederatedTimeline) {
                   let path = "/public/local";
@@ -180,7 +180,7 @@ class NavigationPanel extends Component {
                       path = "/public";
                     }
                   }
-                  return <ColumnLink transparent to={path} isActive={this.isFirehoseActive} icon='globe' iconComponent={PublicIcon} text={intl.formatMessage(messages.firehose)} />
+                  return <ColumnLink transparent to={path} isActive={this.isFirehoseActive} icon='globe' iconComponent={PublicIcon} text={intl.formatMessage(messages.firehose)} />;
                 }
               }
             })()
