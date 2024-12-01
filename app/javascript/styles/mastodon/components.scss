@@ -8350,6 +8350,14 @@ noscript {
     }
   }
 
+  &__followedBy {
+    background-color: #333;
+    border-radius: 3px;
+    color: #999;
+    padding: 3px 7px;
+    width: fit-content;
+  }
+
   &__badges {
     display: flex;
     flex-wrap: wrap;

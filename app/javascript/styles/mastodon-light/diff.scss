@@ -32,6 +32,14 @@
 
 .account__header {
   background: $white;
+
+  &__followedBy {
+    border-radius: 3px;
+    color: #555;
+    background-color: #ccc;
+    padding: 3px 7px;
+    width: fit-content;
+  }
 }
 
 .column-header__button.active {
