@@ -55,7 +55,7 @@
   "account.mutual": "相互フォロー中",
   "account.no_bio": "説明が提供されていません。",
   "account.open_original_page": "元のページを開く",
-  "account.info_remote_server": "リモートサーバーのユーザです。",
+  "account.info_remote_server": "他サーバーのユーザです。",
   "account.posts": "投稿",
   "account.posts_with_replies": "投稿と返信",
   "account.report": "@{name}さんを通報",
