@@ -466,6 +466,12 @@ class Header extends ImmutablePureComponent {
             </div>
           )}
 
+          { (signedIn && account.getIn(['relationship', 'followed_by'])) && (
+            <div className='account__header__followedBy'>
+              <FormattedMessage id='account.followed_by' defaultMessage='Follows you' />
+            </div>
+          )}
+
           {!(suspended || hidden) && (
             <div className='account__header__extra'>
               <div className='account__header__bio' ref={this.setRef}>
