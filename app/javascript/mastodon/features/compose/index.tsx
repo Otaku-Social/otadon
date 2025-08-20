@@ -21,7 +21,7 @@ import { openModal } from 'mastodon/actions/modal';
 import { Column } from 'mastodon/components/column';
 import { ColumnHeader } from 'mastodon/components/column_header';
 import { Icon } from 'mastodon/components/icon';
-import { mascot, reduceMotion } from 'mastodon/initial_state';
+import { mascot, reduceMotion, hideLocalTimeline, hideFederatedTimeline } from 'mastodon/initial_state';
 import { useAppDispatch, useAppSelector } from 'mastodon/store';
 
 import { messages as navbarMessages } from '../ui/components/navigation_bar';
@@ -121,7 +121,7 @@ const Compose: React.FC<{ multiColumn: boolean }> = ({ multiColumn }) => {
               <Icon id='bell' icon={NotificationsIcon} />
             </Link>
           )}
-          {!columns.some((column) => column.get('id') === 'COMMUNITY') && (
+          {((!columns.some((column) => column.get('id') === 'COMMUNITY')) && !hideLocalTimeline) && (
             <Link
               to='/public/local'
               className='drawer__tab'
@@ -131,7 +131,7 @@ const Compose: React.FC<{ multiColumn: boolean }> = ({ multiColumn }) => {
               <Icon id='users' icon={PeopleIcon} />
             </Link>
           )}
-          {!columns.some((column) => column.get('id') === 'PUBLIC') && (
+          {((!columns.some((column) => column.get('id') === 'PUBLIC')) && !hideFederatedTimeline) && (
             <Link
               to='/public'
               className='drawer__tab'

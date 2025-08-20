@@ -26,6 +26,7 @@ import SettingsIcon from '@/material-icons/400-24px/settings.svg?react';
 import StarActiveIcon from '@/material-icons/400-24px/star-fill.svg?react';
 import StarIcon from '@/material-icons/400-24px/star.svg?react';
 import TrendingUpIcon from '@/material-icons/400-24px/trending_up.svg?react';
+import CloudIcon from '@/material-icons/400-24px/cloud.svg?react';
 import { fetchFollowRequests } from 'mastodon/actions/accounts';
 import { openNavigation, closeNavigation } from 'mastodon/actions/navigation';
 import { Account } from 'mastodon/components/account';
@@ -35,7 +36,14 @@ import { Search } from 'mastodon/features/compose/components/search';
 import { ColumnLink } from 'mastodon/features/ui/components/column_link';
 import { useBreakpoint } from 'mastodon/features/ui/hooks/useBreakpoint';
 import { useIdentity } from 'mastodon/identity_context';
-import { timelinePreview, trendsEnabled, me } from 'mastodon/initial_state';
+import { timelinePreview,
+  trendsEnabled,
+  me,
+  showOtadonTagCloud,
+  hideLocalTimeline,
+  hideRemoteTimeline,
+  hideFederatedTimeline
+} from 'mastodon/initial_state';
 import { transientSingleColumn } from 'mastodon/is_mobile';
 import { selectUnreadNotificationGroupsCount } from 'mastodon/selectors/notifications';
 import { useAppSelector, useAppDispatch } from 'mastodon/store';
@@ -257,16 +265,45 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
           />
         )}
 
-        {(signedIn || timelinePreview) && (
-          <ColumnLink
-            transparent
-            to='/public/local'
-            icon='globe'
-            iconComponent={PublicIcon}
-            isActive={isFirehoseActive}
-            text={intl.formatMessage(messages.firehose)}
-          />
-        )}
+        { /* eslint-disable consistent-return */
+          (() => {
+            if (!signedIn) {
+              return (
+                <ColumnLink
+                  transparent
+                  to='/public/local'
+                  icon='globe'
+                  iconComponent={PublicIcon}
+                  isActive={isFirehoseActive}
+                  text={intl.formatMessage(messages.firehose)}
+                />
+              )
+            } else {
+              if (!hideLocalTimeline || !hideRemoteTimeline || !hideFederatedTimeline) {
+                let path = "/public/local";
+
+                if (hideLocalTimeline) {
+                  path = "/public/remote";
+                  if (hideRemoteTimeline) {
+                    path = "/public";
+                  }
+                }
+                return (
+                  <ColumnLink
+                    transparent
+                    to={path}
+                    icon='globe'
+                    iconComponent={PublicIcon}
+                    isActive={isFirehoseActive}
+                    text={intl.formatMessage(messages.firehose)}
+                  />
+                )
+              }
+            }
+          })()
+          /* eslint-enable consistent-return */
+        }
+
 
         {signedIn && (
           <>
@@ -317,6 +354,15 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
             <MoreLink />
           </>
         )}
+
+        { /* eslint-disable react/jsx-no-useless-fragment */
+          (timelinePreview) && (
+            <>
+              {showOtadonTagCloud && <ColumnLink transparent href='https://tagcloud.otadon.com/' icon='cloud' iconComponent={CloudIcon} text='Otadon Hashtag Cloud' />}
+            </>
+          )
+          /* eslint-enable react/jsx-no-useless-fragment */
+        }
 
         <div className='navigation-panel__legal'>
           <ColumnLink
