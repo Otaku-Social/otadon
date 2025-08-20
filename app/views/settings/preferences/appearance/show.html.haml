@@ -41,9 +41,9 @@
     %p.hint= t 'メニューから指定した公開タイムラインを非表示にすることができます。'
 
     .fields-group
-      = ff.input :hide_local_timeline, as: :boolean, wrapper: :with_label
-      = ff.input :hide_remote_timeline, as: :boolean, wrapper: :with_label
-      = ff.input :hide_federated_timeline, as: :boolean, wrapper: :with_label
+      = ff.input :hide_local_timeline, as: :boolean, wrapper: :with_label, label: I18n.t('simple_form.labels.defaults.setting_hide_local')
+      = ff.input :hide_remote_timeline, as: :boolean, wrapper: :with_label, label: I18n.t('simple_form.labels.defaults.setting_hide_remote')
+      = ff.input :hide_federated_timeline, as: :boolean, wrapper: :with_label, label: I18n.t('simple_form.labels.defaults.setting_hide_federated')
 
     %p.hint= t '（いつも使う公開範囲）意図せず公開タイムラインに投稿が掲載されないようにするには、いつも使う公開範囲を「公開」以外に設定することをおすすめします。'
 
@@ -78,7 +78,7 @@
     %h4= t 'カスタム絵文字'
 
     .fields-group
-      = ff.input :resized_custom_emoji, collection: ['default', 'hover', 'best', 'fixed_x2', 'fixed_x3'],label_method: lambda { |item| t("simple_form.hints.defaults.display_local_emoji_#{item}") }, hint: false, as: :radio_buttons, collection_wrapper_tag: 'ul', item_wrapper_tag: 'li', wrapper: :with_floating_label
+      = ff.input :resized_custom_emoji, collection: ['default', 'hover', 'best', 'fixed_x2', 'fixed_x3'],label_method: lambda { |item| I18n.t("simple_form.labels.defaults.setting_emoji_size_#{item}") }, hint: false, as: :radio_buttons, collection_wrapper_tag: 'ul', item_wrapper_tag: 'li', wrapper: :with_floating_label
 
     %h4= t 'サジェスト'
 
@@ -89,7 +89,7 @@
 
     .fields-group
       = ff.input :'web.trends', wrapper: :with_label, label: I18n.t('simple_form.labels.defaults.setting_trends')
-      = ff.input :show_otadon_tag_cloud, as: :boolean, wrapper: :with_label
+      = ff.input :show_otadon_tag_cloud, as: :boolean, wrapper: :with_label, label: I18n.t('simple_form.labels.defaults.setting_otadon_tag_cloud')
 
     %h4= t 'appearance.confirmation_dialogs'
 
