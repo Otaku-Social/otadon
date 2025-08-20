@@ -12,7 +12,7 @@ import {
 } from 'mastodon/initial_state';
 
 const DividingCircle: React.FC = () => <span aria-hidden>{' · '}</span>;
-
+const nowYear = new Date().getFullYear();
 export const LinkFooter: React.FC<{
   multiColumn: boolean;
 }> = ({ multiColumn }) => {
@@ -68,6 +68,8 @@ export const LinkFooter: React.FC<{
             </Link>
           </>
         )}
+        <DividingCircle />
+        {nowYear} Otaku Social.
       </p>
 
       <p>
