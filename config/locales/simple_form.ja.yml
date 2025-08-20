@@ -248,11 +248,13 @@ ja:
         setting_hide_remote: リモートタイムラインを非表示にする
         setting_hide_federated: 連合タイムラインを非表示にする
         setting_trends: 本日のトレンドタグを表示する
+        setting_emoji_size: 絵文字のサイズ
         setting_emoji_size_default: デフォルトのサイズで表示する
         setting_emoji_size_hover: ホバー時に拡大表示する
         setting_emoji_size_best: 程よく拡大表示する
         setting_emoji_size_fixed_x2: 拡大して表示する
         setting_emoji_size_fixed_x3: 拡大して表示する（もっと巨大化）
+        setting_disable_follow_suggest: フォローを増やしてみませんか？を非表示にする
         setting_otadon_tag_cloud: Otadon Tag Cloudを表示する
         setting_unfollow_modal: フォローを解除する前に確認ダイアログを表示する
         setting_use_blurhash: 非表示のメディアを色付きのぼかしで表示する

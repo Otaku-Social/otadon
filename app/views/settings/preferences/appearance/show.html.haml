@@ -78,12 +78,20 @@
     %h4= t 'カスタム絵文字'
 
     .fields-group
-      = ff.input :resized_custom_emoji, collection: ['default', 'hover', 'best', 'fixed_x2', 'fixed_x3'],label_method: lambda { |item| I18n.t("simple_form.labels.defaults.setting_emoji_size_#{item}") }, hint: false, as: :radio_buttons, collection_wrapper_tag: 'ul', item_wrapper_tag: 'li', wrapper: :with_floating_label
+      = ff.input :resized_custom_emoji,
+                 collection: ['default', 'hover', 'best', 'fixed_x2', 'fixed_x3'],
+                 label_method: lambda { |item| I18n.t("simple_form.labels.defaults.setting_emoji_size_#{item}") },
+                 label: I18n.t('simple_form.labels.defaults.setting_emoji_size'),
+                 hint: false,
+                 as: :radio_buttons,
+                 collection_wrapper_tag: 'ul',
+                 item_wrapper_tag: 'li',
+                 wrapper: :with_floating_label
 
-    %h4= t 'サジェスト'
+    %h4= t 'フォローを増やす'
 
     .fields-group
-      = ff.input :disable_follow_suggestion, as: :boolean, wrapper: :with_label
+      = ff.input :disable_follow_suggestion, as: :boolean, wrapper: :with_label, label: I18n.t('simple_form.labels.defaults.setting_disable_follow_suggest')
 
     %h4= t 'appearance.discovery'
 
