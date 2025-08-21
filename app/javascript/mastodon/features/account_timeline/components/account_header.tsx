@@ -825,10 +825,21 @@ export const AccountHeader: React.FC<{
             <div className='remote-user-info-container'>
               <Icon id='retweet' icon={OpenInNew} />
               <div className='remote-user-info-text'>
-                <FormattedMessage id='account.info_remote_server' defaultMessage='This is a remote server user.' />
+                <FormattedMessage
+                  id='account.info_remote_server'
+                  defaultMessage='This is a remote server user.'
+                />
               </div>
-              <a href={account.get('url')} target='_blank' rel="nofollow noopener noreferrer" className='link-button'>
-                <FormattedMessage id='account.open_original_page' defaultMessage='Open original page' />
+              <a
+                href={account.get('url')}
+                target='_blank'
+                rel='nofollow noopener noreferrer'
+                className='link-button'
+              >
+                <FormattedMessage
+                  id='account.open_original_page'
+                  defaultMessage='Open original page'
+                />
               </a>
             </div>
           </div>
@@ -902,9 +913,12 @@ export const AccountHeader: React.FC<{
             <FamiliarFollowers accountId={accountId} />
           )}
 
-          { (signedIn && relationship?.getIn(['followed_by'])) && (
+          {signedIn && !!relationship?.getIn(['followed_by']) && (
             <div className='account__header__followedBy'>
-              <FormattedMessage id='account.followed_by' defaultMessage='Follows you' />
+              <FormattedMessage
+                id='account.followed_by'
+                defaultMessage='Follows you'
+              />
             </div>
           )}
 

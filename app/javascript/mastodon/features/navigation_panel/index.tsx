@@ -36,13 +36,14 @@ import { Search } from 'mastodon/features/compose/components/search';
 import { ColumnLink } from 'mastodon/features/ui/components/column_link';
 import { useBreakpoint } from 'mastodon/features/ui/hooks/useBreakpoint';
 import { useIdentity } from 'mastodon/identity_context';
-import { timelinePreview,
+import {
+  timelinePreview,
   trendsEnabled,
   me,
   showOtadonTagCloud,
   hideLocalTimeline,
   hideRemoteTimeline,
-  hideFederatedTimeline
+  hideFederatedTimeline,
 } from 'mastodon/initial_state';
 import { transientSingleColumn } from 'mastodon/is_mobile';
 import { selectUnreadNotificationGroupsCount } from 'mastodon/selectors/notifications';
@@ -265,44 +266,46 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
           />
         )}
 
-        {
-          (() => {
-            if (!signedIn) {
+        {(() => {
+          if (!signedIn) {
+            return (
+              <ColumnLink
+                transparent
+                to='/public/local'
+                icon='globe'
+                iconComponent={PublicIcon}
+                isActive={isFirehoseActive}
+                text={intl.formatMessage(messages.firehose)}
+              />
+            );
+          } else {
+            if (
+              !hideLocalTimeline ||
+              !hideRemoteTimeline ||
+              !hideFederatedTimeline
+            ) {
+              let path = '/public/local';
+
+              if (hideLocalTimeline) {
+                path = '/public/remote';
+                if (hideRemoteTimeline) {
+                  path = '/public';
+                }
+              }
               return (
                 <ColumnLink
                   transparent
-                  to='/public/local'
+                  to={path}
                   icon='globe'
                   iconComponent={PublicIcon}
                   isActive={isFirehoseActive}
                   text={intl.formatMessage(messages.firehose)}
                 />
-              )
-            } else {
-              if (!hideLocalTimeline || !hideRemoteTimeline || !hideFederatedTimeline) {
-                let path = "/public/local";
-
-                if (hideLocalTimeline) {
-                  path = "/public/remote";
-                  if (hideRemoteTimeline) {
-                    path = "/public";
-                  }
-                }
-                return (
-                  <ColumnLink
-                    transparent
-                    to={path}
-                    icon='globe'
-                    iconComponent={PublicIcon}
-                    isActive={isFirehoseActive}
-                    text={intl.formatMessage(messages.firehose)}
-                  />
-                )
-              }
+              );
             }
-          })()
-        }
-
+          }
+          return null;
+        })()}
 
         {signedIn && (
           <>
@@ -354,10 +357,19 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
           </>
         )}
 
-        { /* eslint-disable react/jsx-no-useless-fragment */
-          (timelinePreview) && (
+        {
+          /* eslint-disable react/jsx-no-useless-fragment */
+          timelinePreview && (
             <>
-              {showOtadonTagCloud && <ColumnLink transparent href='https://tagcloud.otadon.com/' icon='cloud' iconComponent={CloudIcon} text='Otadon Hashtag Cloud' />}
+              {showOtadonTagCloud && (
+                <ColumnLink
+                  transparent
+                  href='https://tagcloud.otadon.com/'
+                  icon='cloud'
+                  iconComponent={CloudIcon}
+                  text='Otadon Hashtag Cloud'
+                />
+              )}
             </>
           )
           /* eslint-enable react/jsx-no-useless-fragment */
