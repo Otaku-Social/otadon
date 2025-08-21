@@ -48,7 +48,14 @@
     %p.hint= t '（いつも使う公開範囲）意図せず公開タイムラインに投稿が掲載されないようにするには、いつも使う公開範囲を「公開」以外に設定することをおすすめします。'
 
     .fields-group.fields-row__column.fields-row__column-12
-      = ff.input :default_privacy, collection: Status.selectable_visibilities, wrapper: :with_label, include_blank: false, label_method: ->(visibility) { safe_join([I18n.t("statuses.visibilities.#{visibility}"), I18n.t("statuses.visibilities.#{visibility}_long")], ' - ') }, required: false, hint: false, label: I18n.t('simple_form.labels.defaults.setting_default_privacy')
+      = ff.input :default_privacy,
+                 collection: Status.selectable_visibilities,
+                 wrapper: :with_label,
+                 include_blank: false,
+                 label_method: ->(visibility) { safe_join([I18n.t("statuses.visibilities.#{visibility}"), I18n.t("statuses.visibilities.#{visibility}_long")], ' - ') },
+                 required: false,
+                 hint: false,
+                 label: I18n.t('simple_form.labels.defaults.setting_default_privacy')
 
     %h4= t 'appearance.advanced_web_interface'
 
@@ -79,8 +86,8 @@
 
     .fields-group
       = ff.input :resized_custom_emoji,
-                 collection: ['default', 'hover', 'best', 'fixed_x2', 'fixed_x3'],
-                 label_method: lambda { |item| I18n.t("simple_form.labels.defaults.setting_emoji_size_#{item}") },
+                 collection: %w(default hover best fixed_x2 fixed_x3),
+                 label_method: ->(item) { I18n.t("simple_form.labels.defaults.setting_emoji_size_#{item}") },
                  label: I18n.t('simple_form.labels.defaults.setting_emoji_size'),
                  hint: false,
                  as: :radio_buttons,

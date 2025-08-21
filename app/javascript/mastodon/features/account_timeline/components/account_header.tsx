@@ -12,8 +12,8 @@ import LockIcon from '@/material-icons/400-24px/lock.svg?react';
 import MoreHorizIcon from '@/material-icons/400-24px/more_horiz.svg?react';
 import NotificationsIcon from '@/material-icons/400-24px/notifications.svg?react';
 import NotificationsActiveIcon from '@/material-icons/400-24px/notifications_active-fill.svg?react';
-import ShareIcon from '@/material-icons/400-24px/share.svg?react';
 import OpenInNew from '@/material-icons/400-24px/open_in_new.svg?react';
+import ShareIcon from '@/material-icons/400-24px/share.svg?react';
 import {
   followAccount,
   unblockAccount,
@@ -828,7 +828,7 @@ export const AccountHeader: React.FC<{
                 <FormattedMessage id='account.info_remote_server' defaultMessage='This is a remote server user.' />
               </div>
               <a href={account.get('url')} target='_blank' rel="nofollow noopener noreferrer" className='link-button'>
-                <FormattedMessage id='account.open_original_page' defaultMessage='Open original page'/>
+                <FormattedMessage id='account.open_original_page' defaultMessage='Open original page' />
               </a>
             </div>
           </div>
