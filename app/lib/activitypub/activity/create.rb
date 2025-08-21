@@ -482,7 +482,7 @@ class ActivityPub::Activity::Create < ActivityPub::Activity
     retry
   end
 
-  SPAM_FILTER_MINIMUM_MENTIONS = ENV.fetch('SPAM_FILTER_MINIMUM_MENTIONS', 1).to_i
+  SPAM_FILTER_MINIMUM_MENTIONS = ENV.fetch('SPAM_FILTER_MINIMUM_MENTIONS', 5).to_i
   def like_a_spam?
     !@status.account.local? && @mentions.count > SPAM_FILTER_MINIMUM_MENTIONS
   end
