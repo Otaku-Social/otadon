@@ -265,7 +265,7 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
           />
         )}
 
-        { /* eslint-disable consistent-return */
+        {
           (() => {
             if (!signedIn) {
               return (
@@ -301,7 +301,6 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
               }
             }
           })()
-          /* eslint-enable consistent-return */
         }
 
 
