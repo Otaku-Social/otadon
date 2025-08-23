@@ -136,8 +136,22 @@ class HomeTimeline extends PureComponent {
     const { signedIn } = this.props.identity;
     const banners = [];
 
-    let switchPublic;
     let announcementsButton;
+    let switchPublic;
+
+    if (hasAnnouncements) {
+      announcementsButton = (
+        <button
+          type='button'
+          className={classNames('column-header__button', { 'active': showAnnouncements })}
+          title={intl.formatMessage(showAnnouncements ? messages.hide_announcements : messages.show_announcements)}
+          aria-label={intl.formatMessage(showAnnouncements ? messages.hide_announcements : messages.show_announcements)}
+          onClick={this.handleToggleAnnouncementsClick}
+        >
+          <IconWithBadge id='bullhorn' icon={CampaignIcon} count={unreadAnnouncements} />
+        </button>
+      );
+    }
 
     if (!hideLocalTimeline || !hideRemoteTimeline || !hideFederatedTimeline) {
       let path = '/public/local';
@@ -155,20 +169,6 @@ class HomeTimeline extends PureComponent {
         >
           <IconWithBadge id='public' icon={PublicIcon} />
         </Link>
-      );
-    }
-
-    if (hasAnnouncements) {
-      announcementsButton = (
-        <button
-          type='button'
-          className={classNames('column-header__button', { 'active': showAnnouncements })}
-          title={intl.formatMessage(showAnnouncements ? messages.hide_announcements : messages.show_announcements)}
-          aria-label={intl.formatMessage(showAnnouncements ? messages.hide_announcements : messages.show_announcements)}
-          onClick={this.handleToggleAnnouncementsClick}
-        >
-          <IconWithBadge id='bullhorn' icon={CampaignIcon} count={unreadAnnouncements} />
-        </button>
       );
     }
 
@@ -190,8 +190,8 @@ class HomeTimeline extends PureComponent {
           multiColumn={multiColumn}
           extraButton={
             <>
-              {switchPublic}
               {announcementsButton}
+              {switchPublic}
             </>
           }
           appendContent={hasAnnouncements && showAnnouncements && <AnnouncementsContainer />}
