@@ -1,5 +1,6 @@
 import PropTypes from 'prop-types';
 import { PureComponent } from 'react';
+import { Link } from "react-router-dom";
 
 import { defineMessages, injectIntl, FormattedMessage } from 'react-intl';
 
@@ -10,13 +11,19 @@ import { connect } from 'react-redux';
 
 import CampaignIcon from '@/material-icons/400-24px/campaign.svg?react';
 import HomeIcon from '@/material-icons/400-24px/home-fill.svg?react';
+import PublicIcon from '@/material-icons/400-24px/public.svg?react';
 import { SymbolLogo } from 'mastodon/components/logo';
 import { fetchAnnouncements, toggleShowAnnouncements } from 'mastodon/actions/announcements';
 import { IconWithBadge } from 'mastodon/components/icon_with_badge';
 import { NotSignedInIndicator } from 'mastodon/components/not_signed_in_indicator';
 import AnnouncementsContainer from 'mastodon/features/getting_started/containers/announcements_container';
 import { identityContextPropShape, withIdentity } from 'mastodon/identity_context';
-import { criticalUpdatesPending } from 'mastodon/initial_state';
+import {
+  criticalUpdatesPending,
+  hideLocalTimeline,
+  hideRemoteTimeline,
+  hideFederatedTimeline
+} from 'mastodon/initial_state';
 import { withBreakpoint } from 'mastodon/features/ui/hooks/useBreakpoint';
 
 import { addColumn, removeColumn, moveColumn } from '../../actions/columns';
@@ -130,6 +137,7 @@ class HomeTimeline extends PureComponent {
     const banners = [];
 
     let announcementsButton;
+    let switchPublic;
 
     if (hasAnnouncements) {
       announcementsButton = (
@@ -142,6 +150,25 @@ class HomeTimeline extends PureComponent {
         >
           <IconWithBadge id='bullhorn' icon={CampaignIcon} count={unreadAnnouncements} />
         </button>
+      );
+    }
+
+    if (!hideLocalTimeline || !hideRemoteTimeline || !hideFederatedTimeline) {
+      let path = '/public/local';
+
+      if (hideLocalTimeline) {
+        path = '/public/remote';
+        if (hideRemoteTimeline) {
+          path = '/public';
+        }
+      }
+      switchPublic = (
+        <Link
+          to={path}
+          className={classNames('column-header__button')}
+        >
+          <IconWithBadge id='public' icon={PublicIcon} />
+        </Link>
       );
     }
 
@@ -161,7 +188,12 @@ class HomeTimeline extends PureComponent {
           onClick={this.handleHeaderClick}
           pinned={pinned}
           multiColumn={multiColumn}
-          extraButton={announcementsButton}
+          extraButton={
+            <>
+              {announcementsButton}
+              {switchPublic}
+            </>
+          }
           appendContent={hasAnnouncements && showAnnouncements && <AnnouncementsContainer />}
         >
           <ColumnSettings />

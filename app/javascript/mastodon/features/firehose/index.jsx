@@ -4,10 +4,11 @@ import { useRef, useCallback, useEffect } from 'react';
 import { useIntl, defineMessages, FormattedMessage } from 'react-intl';
 
 import { Helmet } from 'react-helmet';
-import { NavLink } from 'react-router-dom';
+import {Link, NavLink} from 'react-router-dom';
 
 import { useIdentity } from '@/mastodon/identity_context';
 import PublicIcon from '@/material-icons/400-24px/public.svg?react';
+import HomeIcon from '@/material-icons/400-24px/home-fill.svg?react';
 import { addColumn } from 'mastodon/actions/columns';
 import { changeSetting } from 'mastodon/actions/settings';
 import { connectPublicStream, connectCommunityStream } from 'mastodon/actions/streaming';
@@ -20,6 +21,8 @@ import Column from '../../components/column';
 import ColumnHeader from '../../components/column_header';
 import SettingToggle from '../notifications/components/setting_toggle';
 import StatusListContainer from '../ui/containers/status_list_container';
+import classNames from "classnames";
+import {IconWithBadge} from "mastodon/components/icon_with_badge";
 
 const messages = defineMessages({
   title: { id: 'column.firehose', defaultMessage: 'Live feeds' },
@@ -161,6 +164,14 @@ const Firehose = ({ feedType, multiColumn }) => {
         onPin={handlePin}
         onClick={handleHeaderClick}
         multiColumn={multiColumn}
+        extraButton={
+          <Link
+            to='/home'
+            className={classNames('column-header__button')}
+          >
+            <IconWithBadge id='public' icon={HomeIcon} />
+          </Link>
+        }
       >
         <ColumnSettings />
       </ColumnHeader>
