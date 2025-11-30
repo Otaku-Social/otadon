@@ -2,6 +2,28 @@
 
 All notable changes to this project will be documented in this file.
 
+## [4.4.9] - 2025-11-20
+
+### Fixed
+
+- Fix `tootctl upgrade storage-schema` failing with `ArgumentError` (#36914 by @shugo)
+- Fix old previously-undiscovered posts being treated as new when receiving an `Update` (#36848 by @ClearlyClaire)
+- Fix filters not being applied to quotes in detailed view (#36843 by @ClearlyClaire)
+
+## [4.4.8] - 2025-10-21
+
+### Security
+
+- Fix quote control bypass ([GHSA-8h43-rcqj-wpc6](https://github.com/mastodon/mastodon/security/advisories/GHSA-8h43-rcqj-wpc6))
+
+## [4.4.7] - 2025-10-15
+
+### Fixed
+
+- Fix forwarder being called with `nil` status when quote post is soft-deleted (#36463 by @ClearlyClaire)
+- Fix moderation warning e-mails that include posts (#36462 by @ClearlyClaire)
+- Fix allow_referrer_origin typo (#36460 by @ShadowJonathan)
+
 ## [4.4.6] - 2025-10-13
 
 ### Security
