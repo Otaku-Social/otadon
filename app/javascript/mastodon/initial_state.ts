@@ -47,6 +47,12 @@ interface InitialStateMeta {
   status_page_url: string;
   terms_of_service_enabled: boolean;
   emoji_style?: string;
+  resized_custom_emoji?: string;
+  hide_local_timeline?: boolean;
+  hide_remote_timeline?: boolean;
+  hide_federated_timeline?: boolean;
+  show_otadon_tag_cloud?: boolean;
+  disable_follow_suggestion?: boolean;
 }
 
 interface Role {
@@ -128,6 +134,12 @@ export const criticalUpdatesPending = initialState?.critical_updates_pending;
 export const statusPageUrl = getMeta('status_page_url');
 export const sso_redirect = getMeta('sso_redirect');
 export const termsOfServiceEnabled = getMeta('terms_of_service_enabled');
+export const resizedCustomEmoji = getMeta('resized_custom_emoji');
+export const hideLocalTimeline = getMeta('hide_local_timeline');
+export const hideRemoteTimeline = getMeta('hide_remote_timeline');
+export const hideFederatedTimeline = getMeta('hide_federated_timeline');
+export const showOtadonTagCloud = getMeta('show_otadon_tag_cloud');
+export const disableFollowSuggestion = getMeta('disable_follow_suggestion');
 
 const displayNames =
   // Intl.DisplayNames can be undefined in old browsers
