@@ -37,7 +37,8 @@ import { ColumnLink } from 'mastodon/features/ui/components/column_link';
 import { useBreakpoint } from 'mastodon/features/ui/hooks/useBreakpoint';
 import { useIdentity } from 'mastodon/identity_context';
 import {
-  timelinePreview,
+  localLiveFeedAccess,
+  remoteLiveFeedAccess,
   trendsEnabled,
   me,
   showOtadonTagCloud,
@@ -46,6 +47,7 @@ import {
   hideFederatedTimeline,
 } from 'mastodon/initial_state';
 import { transientSingleColumn } from 'mastodon/is_mobile';
+import { canViewFeed } from 'mastodon/permissions';
 import { selectUnreadNotificationGroupsCount } from 'mastodon/selectors/notifications';
 import { useAppSelector, useAppDispatch } from 'mastodon/store';
 
@@ -64,6 +66,10 @@ const messages = defineMessages({
   },
   explore: { id: 'explore.title', defaultMessage: 'Trending' },
   firehose: { id: 'column.firehose', defaultMessage: 'Live feeds' },
+  firehose_singular: {
+    id: 'column.firehose_singular',
+    defaultMessage: 'Live feed',
+  },
   direct: { id: 'navigation_bar.direct', defaultMessage: 'Private mentions' },
   favourites: { id: 'navigation_bar.favourites', defaultMessage: 'Favorites' },
   bookmarks: { id: 'navigation_bar.bookmarks', defaultMessage: 'Bookmarks' },
@@ -198,7 +204,7 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
   multiColumn = false,
 }) => {
   const intl = useIntl();
-  const { signedIn, disabledAccountId } = useIdentity();
+  const { signedIn, permissions, disabledAccountId } = useIdentity();
   const location = useLocation();
   const showSearch = useBreakpoint('full') && !multiColumn;
 
@@ -266,46 +272,92 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
           />
         )}
 
-        {(() => {
-          if (!signedIn) {
-            return (
-              <ColumnLink
-                transparent
-                to='/public/local'
-                icon='globe'
-                iconComponent={PublicIcon}
-                isActive={isFirehoseActive}
-                text={intl.formatMessage(messages.firehose)}
-              />
-            );
-          } else {
-            if (
-              !hideLocalTimeline ||
-              !hideRemoteTimeline ||
-              !hideFederatedTimeline
-            ) {
-              let path = '/public/local';
+        {
+          (() => {
 
-              if (hideLocalTimeline) {
-                path = '/public/remote';
-                if (hideRemoteTimeline) {
-                  path = '/public';
+            let canAccessLocal = canViewFeed(signedIn, permissions, localLiveFeedAccess);
+            let canAccessRemote = canViewFeed(signedIn, permissions, remoteLiveFeedAccess);
+
+            /* サインインしていない時はデフォルトの動作 */
+            if (!signedIn) {
+              return (
+                (canAccessLocal || canAccessRemote) && (
+                  <ColumnLink
+                    transparent
+                    to={
+                      canViewFeed(signedIn, permissions, localLiveFeedAccess)
+                        ? '/public/local'
+                        : '/public/remote'
+                    }
+                    icon='globe'
+                    iconComponent={PublicIcon}
+                    isActive={isFirehoseActive}
+                    text={intl.formatMessage(
+                      canAccessLocal && canAccessRemote
+                        ? messages.firehose
+                        : messages.firehose_singular,
+                    )}
+                  />
+                )
+              )
+            } else {
+              /* サインイン時は設定によってメニュー表示を制御 */
+              if (
+                hideLocalTimeline &&
+                hideRemoteTimeline &&
+                hideFederatedTimeline
+              ) {
+                /* 公開タイムライン無効時 */
+                return null;
+              } else {
+                /* 公開タイムライン有効時 */
+                /* LTLかRTL権限あり */
+                let path;
+
+                if (canAccessLocal || canAccessRemote) {
+                  if (hideLocalTimeline && hideRemoteTimeline) {
+                    path = '/public';
+                  } else if (!hideRemoteTimeline && !canAccessLocal) {
+                    path = '/public/remote';
+                  } else if (hideLocalTimeline && !hideRemoteTimeline) {
+                    path = '/public/remote';
+                  } else {
+                    path = '/public/local';
+                  }
+
+                  return (
+                    <ColumnLink
+                      transparent
+                      to={path}
+                      icon='globe'
+                      iconComponent={PublicIcon}
+                      isActive={isFirehoseActive}
+                      text={intl.formatMessage(messages.firehose)}
+                    />
+                  )
+
+                } else {
+                  /* LTL、RTL権限なし */
+                  if (hideFederatedTimeline) {
+                    return null;
+                  } else {
+                    return (
+                      <ColumnLink
+                        transparent
+                        to='/public'
+                        icon='globe'
+                        iconComponent={PublicIcon}
+                        isActive={isFirehoseActive}
+                        text={intl.formatMessage(messages.firehose)}
+                      />
+                    )
+                  }
                 }
               }
-              return (
-                <ColumnLink
-                  transparent
-                  to={path}
-                  icon='globe'
-                  iconComponent={PublicIcon}
-                  isActive={isFirehoseActive}
-                  text={intl.formatMessage(messages.firehose)}
-                />
-              );
             }
-          }
-          return null;
-        })()}
+
+          })()
+        }
 
         {signedIn && (
           <>
@@ -359,7 +411,7 @@ export const NavigationPanel: React.FC<{ multiColumn?: boolean }> = ({
 
         {
           /* eslint-disable react/jsx-no-useless-fragment */
-          timelinePreview && (
+          signedIn && (
             <>
               {showOtadonTagCloud && (
                 <ColumnLink
