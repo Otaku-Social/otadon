@@ -188,7 +188,12 @@ class HomeTimeline extends PureComponent {
           onClick={this.handleHeaderClick}
           pinned={pinned}
           multiColumn={multiColumn}
-          extraButton={announcementsButton}
+          extraButton={
+            <>
+              {announcementsButton}
+              {switchPublic}
+            </>
+          }
           appendContent={hasAnnouncements && showAnnouncements && <Announcements />}
         >
           <ColumnSettings />
