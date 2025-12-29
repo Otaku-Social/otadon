@@ -1,6 +1,7 @@
 import type { FC } from 'react';
 import { useContext, useEffect, useState } from 'react';
 
+
 import { EMOJI_TYPE_CUSTOM } from '@/mastodon/features/emoji/constants';
 import { useEmojiAppState } from '@/mastodon/features/emoji/mode';
 import { unicodeHexToUrl } from '@/mastodon/features/emoji/normalize';
@@ -12,6 +13,7 @@ import {
   tokenizeText,
 } from '@/mastodon/features/emoji/render';
 
+import { resizedCustomEmoji } from '../../initial_state';
 import { AnimateEmojiContext, CustomEmojiContext } from './context';
 
 interface EmojiProps {
@@ -61,12 +63,31 @@ export const Emoji: FC<EmojiProps> = ({
 
   if (state.type === EMOJI_TYPE_CUSTOM) {
     const shortcode = `:${state.code}:`;
+    let emojiStyle = 'emojione-wide custom-emoji';
+
+    switch (resizedCustomEmoji) {
+      case 'hover':
+        emojiStyle = 'emojione resized-custom-emoji';
+        break;
+      case 'best':
+        emojiStyle = 'emojione resized-custom-emoji-the-best';
+        break;
+      case 'fixed_x2':
+        emojiStyle = 'emojione resized-custom-emoji-fixed';
+        break;
+      case 'fixed_x3':
+        emojiStyle = 'emojione resized-custom-emoji-fixed-big';
+        break;
+      default:
+        break;
+    }
+
     return (
       <img
         src={animate ? state.data.url : state.data.static_url}
         alt={shortcode}
         title={shortcode}
-        className='emojione custom-emoji'
+        className={emojiStyle}
         loading='lazy'
       />
     );
