@@ -16,7 +16,6 @@ import { SymbolLogo } from 'mastodon/components/logo';
 import { fetchAnnouncements, toggleShowAnnouncements } from 'mastodon/actions/announcements';
 import { IconWithBadge } from 'mastodon/components/icon_with_badge';
 import { NotSignedInIndicator } from 'mastodon/components/not_signed_in_indicator';
-import AnnouncementsContainer from 'mastodon/features/getting_started/containers/announcements_container';
 import { identityContextPropShape, withIdentity } from 'mastodon/identity_context';
 import {
   criticalUpdatesPending,
@@ -34,6 +33,7 @@ import StatusListContainer from '../ui/containers/status_list_container';
 
 import { ColumnSettings } from './components/column_settings';
 import { CriticalUpdateBanner } from './components/critical_update_banner';
+import { Announcements } from './components/announcements';
 
 const messages = defineMessages({
   title: { id: 'column.home', defaultMessage: 'Home' },
@@ -194,7 +194,7 @@ class HomeTimeline extends PureComponent {
               {switchPublic}
             </>
           }
-          appendContent={hasAnnouncements && showAnnouncements && <AnnouncementsContainer />}
+          appendContent={hasAnnouncements && showAnnouncements && <Announcements />}
         >
           <ColumnSettings />
         </ColumnHeader>
